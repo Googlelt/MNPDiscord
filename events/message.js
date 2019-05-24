@@ -6,9 +6,7 @@ let modules = {
 module.exports = async (client, msg) => {
     if(msg.channel.type !== "text") return;
     if(msg.author.bot) return;
-
-    console.time();
-
+    
     let prefix = client.config.prefix;
 
     let msgArray = msg.content.split(" ");
@@ -26,6 +24,4 @@ module.exports = async (client, msg) => {
     let cmdFile = client.commands.get(cmd.slice(prefix.length));
 
     if(cmdFile) cmdFile.run(client, msg, args);
-
-    return console.timeEnd();
 };
