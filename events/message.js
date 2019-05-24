@@ -6,7 +6,7 @@ let modules = {
 module.exports = async (client, msg) => {
     if(msg.channel.type !== "text") return;
     if(msg.author.bot) return;
-    
+
     let prefix = client.config.prefix;
 
     let msgArray = msg.content.split(" ");
