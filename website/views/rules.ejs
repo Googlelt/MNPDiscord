@@ -1,0 +1,39 @@
+<style><%- include ../public/css/rules.css %></style>
+
+<% let rules = `You MUST be 13+ to be in this server. This is discord TOS
+
+Racism of any sort will not be acceptable in any channel (nigga is an exception as long as it's not used in a racist way)
+
+Personal attacks on people i.e (Ddos threats, Dox threats, IRL threats, Harassment and Sexual harassment, False accusations)
+
+No excessive staff disrespect
+
+Must use correct channels for commands
+
+No advertisements servers including DM’s
+
+No promoting the intentional use of
+
+glitches/hacking to exploit the server.
+
+No inviting unofficial bot
+
+No referral/invite links in chat.
+
+No posting gore/animal cruelty or promoting
+suicide Follow Discord Terms of Service and Discord Community Guidelines
+
+No leaking personal photos from DM's without specific permission
+
+No impersonation of staff members
+
+No evading bans or mutes with alts or friends accounts
+
+Use common sense, don't be a complete idiot the staff will do what they see fit to punish you for breaking any of these rules`; %>
+
+<div id="rules">
+    <% rules.split("\n").map(line => { %>
+        <h3><%= line %></h3>
+    <% }); %>
+    <br><br>
+</div>

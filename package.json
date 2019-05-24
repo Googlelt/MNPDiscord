@@ -1,0 +1,20 @@
+{
+  "name": "mnp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "github:discordjs/discord.js#8915bc1d37f1b83fc9bbd3cfef337bd5f75e4779",
+    "ejs": "latest",
+    "express": "latest",
+    "express-ejs-layouts": "latest",
+    "fs-nextra": "latest",
+    "mysql2": "latest"
+  }
+}

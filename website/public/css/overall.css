@@ -1,0 +1,74 @@
+@import url("uni_sans_heavy-webfont.woff2");
+@import url("uni_sans_heavy-webfont.woff");
+
+@font-face {
+    font-family: 'uni_sansheavy_caps';
+    src: url('uni_sans_heavy-webfont.woff2') format('woff2'), url('uni_sans_heavy-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+h1, h3 {
+    color: #FFFFFF !important;
+}
+
+.darkBackground {
+    background-color: #2C2F33 !important;
+}
+
+.lightColor {
+    color: #FFFFFF !important;
+}
+
+.blurpleColor {
+    color: #7289DA !important;
+}
+
+.pageHeader {
+    font-size: 500% !important;
+}
+
+.alignTextCenter {
+    text-align: center;
+}
+
+#rules {
+    text-align: center;
+}
+
+.homeHeader {
+    font-family: "uni_sansheavy_caps", serif !important;
+}
+
+#Discord {
+    height: 7.5%;
+    margin-top: -3%;
+    width: auto;
+}
+
+#homeJoinButton {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 15%;
+}
+
+#homeCardsHolder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message {
+    height: 10%;
+}
+
+#comment {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 2%;
+    width: 80%;
+}
+
+#rules {
+    margin-bottom: 2%;
+}

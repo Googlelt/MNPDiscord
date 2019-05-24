@@ -1,0 +1,14 @@
+<style><%- include ../public/css/staff.css %></style>
+
+<%
+    let output = [];
+    client.config.roles.map(role => {
+        let roleInfo = client.guilds.get(client.config.guilds.staff).roles.get(role);
+
+        if(roleInfo.members.size > 0) {
+            %>
+                <%- include ./parts/staff/rows.ejs %>
+            <%
+        }
+    });
+%>

@@ -1,0 +1,11 @@
+<div class="row">
+    <div class="ui item menu darkBackground">
+        <div class="item lightColor staffRoleHeader"><h2><%= roleInfo.name %></h2></div>
+    </div>
+
+    <div class="ui cards centered" id="rows">
+        <% roleInfo.members.map(member => { %>
+            <%- include ./userCard.ejs %>
+        <% }); %>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <title><%= client.config.website.title %></title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    </head>
+
+    <body>
+        <div id="bodyHolder" class="darkBackground">
+            <%- include ./parts/navbar.ejs %>
+            <%- include ./parts/header.ejs %>
+
+            <%- body %>
+        </div>
+
+        <style><%- include ../public/css/body.css %></style>
+
+        <style><%- include ../public/css/overall.css %></style>
+
+        <script><%- include ../public/js/responsive.js %></script>
+    </body>
+</html>
