@@ -3,6 +3,7 @@ module.exports =  {
     prefix: ".",
     color: 0x00AE86,
     development: false,
+    debug: true,
     economy: {
         currencyName: "TwoBits",
         currencyLogo: "https://i.imgur.com/JL1ogMT.png",
