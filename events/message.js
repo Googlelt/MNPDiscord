@@ -17,7 +17,9 @@ module.exports = async (client, msg) => {
     let userData = await modules.userData(client, msg);
 
     //afk
-    modules.afk(client, msg, userData);
+    if(client.config.development) {
+        modules.afk(client, msg, userData);
+    }
 
     if(!msg.content.startsWith(prefix)) return;
 
