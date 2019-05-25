@@ -16,7 +16,11 @@ module.exports = async (client, msg) => {
     //userData
     let userData = await modules.userData(client, msg);
 
-    //afk
+    console.log(userData);
+
+    /*
+        afk
+    */
     if(client.config.development) {
         modules.afk(client, msg, userData);
     }

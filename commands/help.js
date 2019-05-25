@@ -10,4 +10,4 @@ module.exports.run = (client, msg) => {
     return msg.channel.send(new MessageEmbed()
     .setColor(client.config.color)
     .setDescription(commandsString));
-}
+};

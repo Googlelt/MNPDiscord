@@ -10,7 +10,7 @@ module.exports.run = async (client, msg, args) => {
 
     if (amount > client.config.economy.gamble.max) return msg.channel.send(`:x: Max bet is 2000 ${client.config.economy.currencyName}.`);
 
-    let userData = (await client.db.query(`SELECT * FROM users WHERE id = '${msg.author.id}'`))[0][0];
+    let userData = await client.db.query(`SELECT * FROM users WHERE id = '${msg.author.id}'`);
 
     if (amount > userData.balance) return msg.reply(`You don't have enough ${client.config.economy.currencyName}.`);
 

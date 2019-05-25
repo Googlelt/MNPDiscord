@@ -4,7 +4,7 @@ module.exports.run = async (client, msg) => {
     let leaderboardString = ``;
     let counted = 0;
 
-    (await client.db.query(`SELECT * FROM users ORDER BY balance DESC LIMIT 10`))[0].map(row => {
+    (await client.db.raw.query(`SELECT * FROM users ORDER BY balance DESC LIMIT 10`))[0].map(row => {
         let user = client.users.get(row.id);
         if(!user) return;
 

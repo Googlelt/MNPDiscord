@@ -35,7 +35,7 @@ module.exports = (client) => {
         //     return client.utils.getUserInfo(client, row);
         // }));
 
-        let results = await (await client.db.query("SELECT * FROM users ORDER BY balance DESC"))[0];
+        let results = await (await client.db.query("SELECT * FROM users ORDER BY balance DESC"));
 
         let resultsNew = [];
 

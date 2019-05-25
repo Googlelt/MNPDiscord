@@ -1,7 +1,7 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports.run = async (client, msg) => {
-    let userData = (await client.db.query(`SELECT * FROM users WHERE id = '${msg.author.id}'`))[0][0];
+    let userData = await client.db.query(`SELECT * FROM users WHERE id = '${msg.author.id}'`);
 
     userData.lastDaily = parseInt(userData.lastDaily);
 
@@ -22,4 +22,4 @@ module.exports.run = async (client, msg) => {
             .setAuthor(msg.author.username, msg.author.displayAvatarURL())
             .setThumbnail(client.config.economy.currencyLogo));
     }
-}
+};
