@@ -16,8 +16,6 @@ module.exports = async (client, msg) => {
     //userData
     let userData = await modules.userData(client, msg);
 
-    console.log(userData);
-
     /*
         afk
     */
