@@ -2,12 +2,13 @@ const Discord = require("discord.js");
 const config = require("./config");
 const client = new Discord.Client({ fetchAllMembers: true });
 
-require("./lib/commandLoader")(client);
-require("./lib/databaseLoader")(client);
-
 client.config = config;
 client.constructor = require("./lib/constructor");
 client.utils = require("./lib/utils");
+
+
+require("./lib/commandLoader")(client);
+require("./lib/databaseLoader")(client);
 
 require("./website/server")(client);
 
