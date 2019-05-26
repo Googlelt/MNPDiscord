@@ -16,12 +16,4 @@ function responsive() {
 
 responsive();
 
-// document.onreadystatechange = responsive;
-
-// document.onreadystatechange = function() {
-//     if (document.readyState === "complete") {
-//         responsive();
-//     }
-// };
-
 window.onresize = responsive;

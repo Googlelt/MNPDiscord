@@ -5,6 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
+        <meta property="og:title" content="<%= client.config.website.title %>">
+        <meta property="og:description" content="<%= client.config.website.description %>">
+        <meta property="og:url" content="/">
+        <meta property="og:image" content="<%= client.user.displayAvatarURL() %>">
+        <meta name="theme-color" content="<%= client.config.hexColor %>">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

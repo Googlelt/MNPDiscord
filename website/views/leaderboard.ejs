@@ -1,11 +1,4 @@
 <% results.map(row => { %>
-<!--    <div class="leaderboardRow">-->
-<!--        <img src="<%= row.avatar %>" height="48px" align="left">-->
-
-<!--        <div>-->
-<!--            <h6>Balance: <%= row.balance %></h6>-->
-<!--        </div>-->
-<!--    </div>-->
         <div class="ui icon darkBackground message" id="comment_box">
             <i class="icon iconBox">
                 <img class="commentAvatar" src="<%= row.avatar %>" width="48px">
@@ -15,6 +8,4 @@
                 <p class="lightColor"></p>
             </div>
         </div>
-
-
 <% }); %>

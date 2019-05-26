@@ -30,6 +30,14 @@ module.exports = (client) => {
         });
     });
 
+    app.get("/stats", (req, res) => {
+        res.render("stats", {
+            client: client,
+            header: "Stats",
+            mem: process.memoryUsage().heapUsed / 1024 / 1024
+        });
+    });
+
     app.get("/leaderboard", async (req, res) => {
         // let results = await Promise.all((await client.db.query("SELECT * FROM users ORDER BY balance"))[0].map(row => {
         //     return client.utils.getUserInfo(client, row);
