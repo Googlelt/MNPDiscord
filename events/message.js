@@ -27,5 +27,8 @@ module.exports = async (client, msg) => {
 
     let cmdFile = client.commands.get(cmd.slice(prefix.length));
 
-    if(cmdFile) cmdFile.run(client, msg, args);
+    if(cmdFile) {
+        client.cache.stats.commands += 1;
+        cmdFile.run(client, msg, args);
+    }
 };

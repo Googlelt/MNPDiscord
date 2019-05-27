@@ -4,6 +4,9 @@ module.exports = (client) => {
     client.constructor.presence(client);
 
     client.cache = {
+    	stats: {
+    		commands: 0
+    	},
         afk: []
     };
 };

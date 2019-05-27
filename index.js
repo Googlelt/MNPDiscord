@@ -6,6 +6,10 @@ client.config = config;
 client.constructor = require("./lib/constructor");
 client.utils = require("./lib/utils");
 
+if(!client.guilds.get(client.config.guilds.currentGuild)) {
+	client.config.guilds.currentGuild = client.config.guilds.staff;
+};
+
 
 require("./lib/commandLoader")(client);
 require("./lib/databaseLoader")(client);

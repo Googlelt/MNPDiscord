@@ -34,7 +34,18 @@ module.exports = (client) => {
         res.render("stats", {
             client: client,
             header: "Stats",
-            mem: process.memoryUsage().heapUsed / 1024 / 1024
+            stats: {
+                discord: {
+                    members: client.guilds.get(client.config.guilds.currentGuild).members.size,
+                    online: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.user.presence.status !== "offline").size,
+                    offline: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.user.presence.status === "offline").size,
+                    voice: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.voice.channel).size
+                },
+                mem: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
+                processUptime: client.utils.convertTime(process.uptime),
+                uptime: client.utils.convertTime(client.uptime),
+                commands: client.cache.stats.commands
+            }
         });
     });
 
