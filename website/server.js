@@ -13,6 +13,14 @@ module.exports = (client) => {
     app.get("/", (req, res) => {
         res.render("index", {
             client: client,
+            stats: {
+                discord: {
+                    members: client.guilds.get(client.config.guilds.currentGuild).members.size,
+                    online: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.user.presence.status !== "offline").size,
+                    offline: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.user.presence.status === "offline").size,
+                    voice: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.voice.channel).size
+                }
+            }
         });
     });
 
@@ -54,7 +62,7 @@ module.exports = (client) => {
         //     return client.utils.getUserInfo(client, row);
         // }));
 
-        let results = await (await client.db.query("SELECT * FROM users ORDER BY balance DESC"));
+        let results = await (await client.db.raw.query("SELECT * FROM users ORDER BY balance DESC"));[0]
 
         let resultsNew = [];
 

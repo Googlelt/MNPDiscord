@@ -4,6 +4,7 @@ let modules = {
 };
 
 module.exports = async (client, msg) => {
+    console.time("Message_Event");
     if(msg.channel.type !== "text") return;
     if(msg.author.bot) return;
 
@@ -19,9 +20,11 @@ module.exports = async (client, msg) => {
     /*
         afk
     */
-    if(client.config.development) {
-        modules.afk(client, msg, userData);
-    }
+    // if(client.config.development) {
+    //     modules.afk(client, msg, userData);
+    // }
+
+    console.timeEnd("Message_Event");
 
     if(!msg.content.startsWith(prefix)) return;
 
@@ -31,4 +34,5 @@ module.exports = async (client, msg) => {
         client.cache.stats.commands += 1;
         cmdFile.run(client, msg, args);
     }
+
 };

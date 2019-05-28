@@ -11,3 +11,7 @@ module.exports.run = async (client, msg, args) => {
         return msg.reply("I removed your afk");
     }
 };
+
+module.exports.info = {
+    admin: true
+}

@@ -24,14 +24,14 @@ module.exports.run = async (client, msg, args) => {
         newBalance = userData.balance - parseInt(amount);
         msg.channel.send(new MessageEmbed()
             .setColor(client.config.color)
-            .setDescription(`:white: You lost, ${amount} ${client.config.economy.currencyName} have been taken from your bank account.`)
+            .setDescription(`:x: You lost, ${amount} ${client.config.economy.currencyName} have been taken from your bank account.`)
             .setAuthor(msg.author.username, msg.author.displayAvatarURL())
             .setThumbnail(client.config.economy.currencyLogo));
     }else {
         newBalance = userData.balance + parseInt(amount);
         msg.channel.send(new MessageEmbed()
             .setColor(client.config.color)
-            .setDescription(`:x: You Won, ${amount} ${client.config.economy.currencyName} have been added to your bank account.`)
+            .setDescription(`:white: You Won, ${amount} ${client.config.economy.currencyName} have been added to your bank account.`)
             .setAuthor(msg.author.username, msg.author.displayAvatarURL())
             .setThumbnail(client.config.economy.currencyLogo));
     }
