@@ -27,11 +27,20 @@ module.exports.get = async (client, userID) => {
 module.exports.update = async (client, userID, field) => {
     let userData = await JSON.parse(await client.redis.get(`user_${userID}`));
 
-    userData[field.name] = field.value;
+    if(field instanceof Array) {
+        field.map(async row => {
+            userData[row.name] = row.value;
 
-    await client.redis.set(`user_${userID}`, JSON.stringify(userData));
+            await client.redis.set(`user_${userID}`, JSON.stringify(userData));
 
-    await client.db.execute(`UPDATE users SET ${field.name} = '${field.value}' WHERE id = '${userID}'`);
+            await client.db.execute(`UPDATE users SET ${row.name} = '${row.value}' WHERE id = '${userID}'`);
+        });
+    }else {
+        userData[field.name] = field.value;
 
+        await client.redis.set(`user_${userID}`, JSON.stringify(userData));
+        await client.db.execute(`UPDATE users SET ${field.name} = '${field.value}' WHERE id = '${userID}'`);
+    }
+    
     return;
 }

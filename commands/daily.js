@@ -6,20 +6,24 @@ module.exports.run = async (client, msg) => {
     userData.lastDaily = parseInt(userData.lastDaily);
 
     let time = Date.now() - userData.lastDaily > 86400000;
+    
+    let msgContent;
 
     if(time) {
-        await client.db.execute(`UPDATE users SET balance = ${userData.balance + client.config.economy.dailyAmount}, lastDaily = '${Date.now()}' WHERE id = '${msg.author.id}'`);
+        client.userData.update(client, msg.author.id, [{
+                name: "balance",
+                value: userData.balance + client.config.economy.dailyAmount
+            },
+            {
+                name: "lastDaily",
+                value: Date.now()
+            }
+        ]);
 
-        return msg.channel.send(new MessageEmbed()
-            .setColor(client.config.color)
-            .setDescription(`:white_check_mark: Claimed your daily ${client.config.economy.dailyAmount} TwoBits.`)
-            .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-            .setThumbnail(client.config.economy.currencyLogo));
+        msgContent = `:white_check_mark: Claimed your daily ${client.config.economy.dailyAmount} TwoBits.`;
     }else {
-        return msg.channel.send(new MessageEmbed()
-            .setColor(client.config.color)
-            .setDescription(`:x: You can claim your daily again in ${client.utils.convertTime(parseInt(Date.now() - userData.lastDaily - 86400000).toString().replace("-", ""))}.`)
-            .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-            .setThumbnail(client.config.economy.currencyLogo));
+        msgContent = `:x: You can claim your daily again in ${client.utils.convertTime(parseInt(Date.now() - userData.lastDaily - 86400000).toString().replace("-", ""))}.`;
     }
+
+    return msg.channel.send(client.embeds.twobits(client, msg.author, msgContent));
 };

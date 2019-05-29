@@ -10,7 +10,7 @@ module.exports.run = async (client, msg, args) => {
 
     if (amount > client.config.economy.gamble.max) return msg.channel.send(`:x: Max bet is 2000 ${client.config.economy.currencyName}.`);
 
-    let userData = await client.db.query(`SELECT * FROM users WHERE id = '${msg.author.id}'`);
+    let userData = await client.userData.get(client, msg.author.id);
 
     if (amount > userData.balance) return msg.reply(`You don't have enough ${client.config.economy.currencyName}.`);
 
@@ -31,7 +31,7 @@ module.exports.run = async (client, msg, args) => {
         msgContent = `:white_check_mark: You Won, ${amount} ${client.config.economy.currencyName} have been added to your bank account.`;
     }
 
-    await client.db.execute(`UPDATE users SET balance = '${newBalance}' WHERE id = '${msg.author.id}'`);
+    client.userData.update(client, msg.author.id, { name: "balance", value: newBalance });
 
     return msg.channel.send(client.embeds.twobits(client, msg.author, msgContent));
 };

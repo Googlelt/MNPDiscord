@@ -9,17 +9,17 @@ module.exports.run = async (client, msg, args) => {
 
     if(!Number(args[1])) return msg.reply(`The provided amount is not a number.`);
 
-    let userData = (await client.db.query(`SELECT * FROM users WHERE id = ${msg.author.id}`))[0][0];
-    let mentionedUserData = (await client.db.query(`SELECT * FROM users WHERE id = ${mentionedUser.id}`))[0][0];
-
+    let userData = await client.userData.get(client, msg.author.id);
+    let mentionedUserData = await client.userData.get(client, mentionedUser.id);
+    
     if(args[1] > userData.balance) return msg.reply(`You don't have enough ${client.config.economy.currencyName}.`);
 
-    await client.db.execute(`UPDATE users SET balance = ${userData.balance - parseInt(args[1])} WHERE id = '${msg.author.id}'`);
-    await client.db.execute(`UPDATE users SET balance = ${mentionedUserData.balance + parseInt(args[1])} WHERE id = '${mentionedUser.id}'`);
+    client.userData.update(client, msg.author.id, { name: "balance", value: userData.balance - parseInt(args[1]) });
+    client.userData.update(client, mentionedUser.id, { name: "balance", value: mentionedUserData.balance + parseInt(args[1])});
 
-    return msg.channel.send(new MessageEmbed()
-        .setColor(client.config.color)
-        .setDescription(`Successfully donated ${args[1]} ${client.config.economy.currencyName} to  ${mentionedUser.tag}.`)
-        .setAuthor(mentionedUser.username, mentionedUser.displayAvatarURL())
-        .setThumbnail(client.config.economy.currencyLogo));
+    return msg.channel.send(client.embeds.twobits(client, msg.author, `Successfully donated ${args[1]} ${client.config.economy.currencyName} to  ${mentionedUser.tag}.`));
 };
+
+module.exports.help = {
+    aliases: ["give", "pay"]
+}

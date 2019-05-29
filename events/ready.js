@@ -13,4 +13,6 @@ module.exports = (client) => {
     	},
         afk: []
     };
+
+    require("../modules/ban")(client);
 };

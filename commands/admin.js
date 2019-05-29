@@ -69,6 +69,12 @@ module.exports.run = async (client, msg, args) => {
 
         return msg.reply("Settings have been updated");
     }
+
+    if(args[0] === "eval") {
+        let evaled = await eval(args.slice(1).join(" "));
+
+        msg.channel.send("```"+ evaled + "```");
+    }
 };
 
 module.exports.info = {

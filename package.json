@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dateformat": "^3.0.3",
     "discord.js": "github:discordjs/discord.js#8915bc1d37f1b83fc9bbd3cfef337bd5f75e4779",
     "ejs": "latest",
     "express": "latest",

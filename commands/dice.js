@@ -14,13 +14,21 @@ module.exports.run = async (client, msg, args) => {
 
     let result = Math.floor((Math.random() * 6) + 1);
 
+    let newBalance;
+    let msgContent;
+
     if(result === parseInt(args[0])) {
-        await client.db.execute(`UPDATE users SET balance = '${userData.balance + parseInt(args[1])}' WHERE id = '${msg.author.id}'`);
+        newBalance = userData.balance + parseInt(args[1]);
 
-        return msg.channel.send(client.embeds.twobits(client, msg.author, `:white_check_mark: You Won, ${args[1]} ${client.config.economy.currencyName} have been added to your bank account.`));
+        msgContent = `:white_check_mark: You Won, ${args[1]} ${client.config.economy.currencyName} have been added to your bank account.`;
+        
     }else {
-        await client.db.execute(`UPDATE users SET balance = '${userData.balance - parseInt(args[1])}' WHERE id = '${msg.author.id}'`);
+        newBalance = userData.balance - parseInt(args[1]);
 
-        return msg.channel.send(client.embeds.twobits(client, msg.author, `:x: You lost, ${args[1]} ${client.config.economy.currencyName} have been taken from your bank account.`));
+        msgContent = `:x: You lost, ${args[1]} ${client.config.economy.currencyName} have been taken from your bank account.`;
     }
+
+    client.userData.update(client, msg.author.id, { name: "balance", value: newBalance });
+
+    return msg.channel.send(client.embeds.twobits(client, msg.author, msgContent));
 }
