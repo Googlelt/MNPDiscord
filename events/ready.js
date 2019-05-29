@@ -3,6 +3,10 @@ module.exports = (client) => {
 
     client.constructor.presence(client);
 
+    if(!client.guilds.get(client.config.guilds.currentGuild)) {
+	    client.config.guilds.currentGuild = client.config.guilds.staff;
+    };
+
     client.cache = {
     	stats: {
     		commands: 0

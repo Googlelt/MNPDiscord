@@ -11,7 +11,7 @@ let isTrueOrFalse = (boolean) => {
 };
 
 module.exports.run = async (client, msg, args) => {
-    if(!msg.member.hasPermission("ADMINISTRATOR")) return;
+    if(!client.config.whitelist.includes(msg.author.id)) return;
 
     let user = msg.mentions.users.first();
     let channel = msg.mentions.channels.first();
@@ -40,7 +40,9 @@ module.exports.run = async (client, msg, args) => {
 
         if(!Number(args[2])) return msg.reply("The amount must be a number.");
 
-        await client.db.execute(`UPDATE users SET balance = '${parseInt(args[2])}' WHERE id = '${msg.author.id}'`);
+        // await client.db.execute(`UPDATE users SET balance = '${parseInt(args[2])}' WHERE id = '${msg.author.id}'`);
+
+        client.userData.update(client, user.id, { name: "balance", value: parseInt(args[2]) });
 
         return msg.reply(`Balance has been updated`);
     }else if(args[0] === "resetdaily") {

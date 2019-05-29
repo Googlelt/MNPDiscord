@@ -19,22 +19,19 @@ module.exports.run = async (client, msg, args) => {
     let text = generatedNumber ? "heads" : "tails";
 
     let newBalance;
+    let msgContent;
 
     if(text !== flip) {
         newBalance = userData.balance - parseInt(amount);
-        msg.channel.send(new MessageEmbed()
-            .setColor(client.config.color)
-            .setDescription(`:x: You lost, ${amount} ${client.config.economy.currencyName} have been taken from your bank account.`)
-            .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-            .setThumbnail(client.config.economy.currencyLogo));
+
+        msgContent = `:x: You lost, ${amount} ${client.config.economy.currencyName} have been taken from your bank account.`;
     }else {
         newBalance = userData.balance + parseInt(amount);
-        msg.channel.send(new MessageEmbed()
-            .setColor(client.config.color)
-            .setDescription(`:white: You Won, ${amount} ${client.config.economy.currencyName} have been added to your bank account.`)
-            .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-            .setThumbnail(client.config.economy.currencyLogo));
+        
+        msgContent = `:white_check_mark: You Won, ${amount} ${client.config.economy.currencyName} have been added to your bank account.`;
     }
 
-    return await client.db.execute(`UPDATE users SET balance = '${newBalance}' WHERE id = '${msg.author.id}'`);
+    await client.db.execute(`UPDATE users SET balance = '${newBalance}' WHERE id = '${msg.author.id}'`);
+
+    return msg.channel.send(client.embeds.twobits(client, msg.author, msgContent));
 };

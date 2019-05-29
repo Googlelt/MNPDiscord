@@ -4,10 +4,9 @@ let modules = {
 };
 
 module.exports = async (client, msg) => {
-    console.time("Message_Event");
     if(msg.channel.type !== "text") return;
     if(msg.author.bot) return;
-
+    
     let prefix = client.config.prefix;
 
     let msgArray = msg.content.split(" ");
@@ -15,8 +14,10 @@ module.exports = async (client, msg) => {
     let args = msgArray.slice(1);
 
     //userData
-    let userData = await modules.userData(client, msg);
 
+    console.time(`userData: ${msg.author.tag}`);
+    let userData = await modules.userData.get(client, msg.author.id);
+    console.timeEnd(`userData: ${msg.author.tag}`);
     /*
         afk
     */
@@ -24,15 +25,20 @@ module.exports = async (client, msg) => {
     //     modules.afk(client, msg, userData);
     // }
 
-    console.timeEnd("Message_Event");
-
     if(!msg.content.startsWith(prefix)) return;
 
     let cmdFile = client.commands.get(cmd.slice(prefix.length));
 
+    if(!cmdFile) cmdFile = client.commands.get(client.aliases.get(cmd.slice(prefix.length)));
+
     if(cmdFile) {
         client.cache.stats.commands += 1;
-        cmdFile.run(client, msg, args);
+        return cmdFile.run(client, msg, args);
     }
 
+    // let alias = client.commands.get(cmd.slice(prefix.length));
+
+    // if(alias) {
+    //     let cmdFile = client.commands.get(cmd.slice(prefix.length));
+    // }
 };

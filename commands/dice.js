@@ -17,18 +17,10 @@ module.exports.run = async (client, msg, args) => {
     if(result === parseInt(args[0])) {
         await client.db.execute(`UPDATE users SET balance = '${userData.balance + parseInt(args[1])}' WHERE id = '${msg.author.id}'`);
 
-        msg.channel.send(new MessageEmbed()
-            .setColor(client.config.color)
-            .setDescription(`:white: You Won, ${args[1]} ${client.config.economy.currencyName} have been added to your bank account.`)
-            .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-            .setThumbnail(client.config.economy.currencyLogo));
+        return msg.channel.send(client.embeds.twobits(client, msg.author, `:white_check_mark: You Won, ${args[1]} ${client.config.economy.currencyName} have been added to your bank account.`));
     }else {
         await client.db.execute(`UPDATE users SET balance = '${userData.balance - parseInt(args[1])}' WHERE id = '${msg.author.id}'`);
 
-        msg.channel.send(new MessageEmbed()
-            .setColor(client.config.color)
-            .setDescription(`:x: You lost, ${args[1]} ${client.config.economy.currencyName} have been taken from your bank account.`)
-            .setAuthor(msg.author.username, msg.author.displayAvatarURL())
-            .setThumbnail(client.config.economy.currencyLogo));
+        return msg.channel.send(client.embeds.twobits(client, msg.author, `:x: You lost, ${args[1]} ${client.config.economy.currencyName} have been taken from your bank account.`));
     }
 }

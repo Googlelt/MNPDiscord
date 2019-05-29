@@ -5,11 +5,9 @@ const client = new Discord.Client({ fetchAllMembers: true });
 client.config = config;
 client.constructor = require("./lib/constructor");
 client.utils = require("./lib/utils");
+client.embeds = require("./lib/embeds");
 
-if(!client.guilds.get(client.config.guilds.currentGuild)) {
-	client.config.guilds.currentGuild = client.config.guilds.staff;
-};
-
+client.userData = require("./modules/userData");
 
 require("./lib/commandLoader")(client);
 require("./lib/databaseLoader")(client);
