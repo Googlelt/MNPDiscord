@@ -68,9 +68,26 @@ module.exports.run = async (client, msg, args) => {
         await client.db.execute(`UPDATE settings SET value = '${JSON.stringify(json)}' WHERE name = 'welcome'`);
 
         return msg.reply("Settings have been updated");
-    }
+    } else if (args[0] === "drop") {
+        let json = JSON.parse((await client.db.query("SELECT * FROM SETTINGS where name = 'drop'")).value);
 
-    if(args[0] === "eval") {
+        if (args[1] === "enabled") {
+            if (!args[2]) return msg.reply("You must specify a boolean (true, false).");
+            if (!booleans.includes(args[2])) return msg.reply("Invalid boolean.");
+
+            json.enabled = args[2] === "true";
+        } else if(args[1] === "channel") {
+            if (!channel) return msg.reply("You must specify a channel.");
+
+            json.channel = channel.id;
+        }else if(args[1] === "force") {
+            return client.crates.force(client);
+        }
+
+        await client.db.execute(`UPDATE settings SET value = '${JSON.stringify(json)}' WHERE name = 'drop'`);
+
+        return msg.reply("Settings have been updated");
+    }else if(args[0] === "eval") {
         let evaled = await eval(args.slice(1).join(" "));
 
         msg.channel.send("```"+ evaled + "```");

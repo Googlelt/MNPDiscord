@@ -15,4 +15,5 @@ module.exports = (client) => {
     };
 
     require("../modules/ban")(client);
+    client.crates.run(client);
 };

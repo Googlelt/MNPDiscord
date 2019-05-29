@@ -19,6 +19,7 @@
     "fs-nextra": "latest",
     "ioredis": "^4.9.5",
     "moment": "^2.24.0",
-    "mysql2": "latest"
+    "mysql2": "latest",
+    "random-int": "^2.0.0"
   }
 }

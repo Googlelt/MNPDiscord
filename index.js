@@ -7,6 +7,7 @@ client.constructor = require("./lib/constructor");
 client.utils = require("./lib/utils");
 client.embeds = require("./lib/embeds");
 
+client.crates = require("./modules/crates");
 client.userData = require("./modules/userData");
 
 require("./lib/commandLoader")(client);
