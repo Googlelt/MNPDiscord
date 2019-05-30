@@ -26,9 +26,8 @@ async function runLoop(client) {
         max: 1,
         time: 180000,
         errors: ["time"]
-    }).catch(err => {
-        return channel.send(`No one got the crate, Better luck next time.`);
     }).then(async collected => {
+        if(!collected) return;
         let user = collected.first().member.user;
         let userData = await client.userData.get(client, user.id);
 
@@ -41,5 +40,7 @@ async function runLoop(client) {
             .setColor(client.config.color)
             .setTimestamp()
             .setDescription(`**${client.config.economy.currencyName} Crate Drop**\n${user.username} got the ${client.config.economy.currencyName} crate drop and won ${reward} ${client.config.economy.currencyName}!`));
-        });
+    }).catch(err => {
+        return channel.send(`No one got the crate, Better luck next time.`);
+    });
 }
