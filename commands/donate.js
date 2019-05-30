@@ -20,6 +20,6 @@ module.exports.run = async (client, msg, args) => {
     return msg.channel.send(client.embeds.twobits(client, msg.author, `Successfully donated ${args[1]} ${client.config.economy.currencyName} to  ${mentionedUser.tag}.`));
 };
 
-module.exports.help = {
+module.exports.info = {
     aliases: ["give", "pay"]
 }
