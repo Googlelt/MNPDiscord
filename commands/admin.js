@@ -1,3 +1,4 @@
+const { exec } = require("child_process");
 let booleans = ["true", "false"];
 
 let isTrueOrFalse = (boolean) => {
@@ -91,6 +92,12 @@ module.exports.run = async (client, msg, args) => {
         let evaled = await eval(args.slice(1).join(" "));
 
         msg.channel.send("```"+ evaled + "```");
+    }else if(args[0] === "pull") {
+        exec(`git pull ${client.config.git}`, async () => {
+            await msg.reply("Rebooting");
+
+            process.exit();
+        });
     }
 };
 

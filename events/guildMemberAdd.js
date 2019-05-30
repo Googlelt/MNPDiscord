@@ -33,22 +33,24 @@ module.exports = async (client, member) => {
     let json = JSON.parse((await client.db.query("SELECT * FROM SETTINGS where name = 'welcome'")).value);
 
     if(!json.enabled) return;
+    let welcomeChannel = client.channels.get(json.channel);
+    let msgContent;
 
-    if (client.guilds.get(client.config.guilds.currentGuild).size === 30000) {
+    if (client.guilds.get(client.config.guilds.main).members.size === 30000) {
         client.channels.get(json.channel).send(`https://tenor.com/view/congrats-gif-10641964`)
 
-        const embed = new MessageEmbed()
-            .setAuthor(`Welcome | ${member.user.username}`, msg.guild.iconURL())
-            .setColor(client.config.color)
-            .setDescription(`:tada: **30k MEMBERS** :tada:\nCongrats, <@${member.user.id}> on being the 30,000th member to join!\nWelcome to **Meet New People, <@${member.user.id}>!**\nGo start off in <#${client.config.channels.roles}> -- then head to <#${client.config.channels.roles}> and make sure you follow them!\nYou are the ${member.guild.members.size}th member to join!`)
-            .setThumbnail(member.user.displayAvatarURL())
-        client.channels.get(welcomeChannel).send(embed);
+
+
+        msgContent = `:tada: **30k MEMBERS** :tada:\nCongrats, <@${member.user.id}> on being the 30,000th member to join!\nWelcome to **Meet New People, <@${member.user.id}>!**\nGo start off in <#${client.config.channels.roles}> -- then head to <#${client.config.channels.roles}> and make sure you follow them!\nYou are the ${member.guild.members.size}th member to join!`;
     } else {
-        const embed = new MessageEmbed()
-            .setAuthor(`Welcome | ${member.user.username}`, msg.guild.iconURL())
-            .setColor(client.config.color)
-            .setDescription(`:tada: **30k MEMBERS** :tada:\nCongrats, <@${member.user.id}> on being the 30,000th member to join!\nWelcome to **Meet New People, <@${member.user.id}>!**\nGo start off in <#${client.config.channels.roles}> -- then head to <#${client.config.channels.roles}> and make sure you follow them!\nYou are the ${member.guild.members.size}th member to join!`)
-            .setThumbnail(member.user.displayAvatarURL())
-        client.channels.get(welcomeChannel).send(embed);
+        msgContent = `:tada: \nWelcome to **Meet New People, <@${member.user.id}>!**\nGo start off in <#${client.config.channels.roles}> -- then head to <#${client.config.channels.roles}> and make sure you follow them!\nYou are the ${member.guild.members.size}th member to join!`;
     }
+
+    const embed = new MessageEmbed()
+        .setAuthor(`Welcome | ${member.user.username}`, member.guild.iconURL())
+        .setColor(client.config.color)
+        .setDescription(msgContent)
+        .setThumbnail(member.user.displayAvatarURL())
+
+    welcomeChannel.send(embed);
 };

@@ -29,7 +29,7 @@ async function runLoop(client) {
     return;
     }).then(async collected => {
     let user = collected.first().member.user;
-    let userData = await client.userData.get(client, user);
+    let userData = await client.userData.get(client, user.id);
 
     client.userData.update(client, user.id, {
         name: "balance",
