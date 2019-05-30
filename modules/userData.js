@@ -18,7 +18,7 @@ module.exports.get = async (client, userID) => {
     if(hasToReCache) {
         await client.redis.set(`user_${userID}`, JSON.stringify(userData));
 
-        console.log(`Recaching for ${client.users.get(userID).tag}`);
+        // console.log(`Recaching for ${client.users.get(userID).tag}`);
     }
 
     return userData;

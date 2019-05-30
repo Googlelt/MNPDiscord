@@ -11,7 +11,7 @@ client.crates = require("./modules/crates");
 client.userData = require("./modules/userData");
 
 require("./lib/commandLoader")(client);
-require("./lib/databaseLoader")(client);
+require("./lib/databaseLoader").init(client);
 
 require("./website/server")(client);
 

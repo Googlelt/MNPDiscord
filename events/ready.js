@@ -15,5 +15,6 @@ module.exports = (client) => {
     };
 
     require("../modules/ban")(client);
+    require("../lib/databaseLoader").sync(client);
     client.crates.run(client);
 };
