@@ -35,3 +35,7 @@ module.exports.run = async (client, msg, args) => {
 
     return msg.channel.send(client.embeds.twobits(client, msg.author, msgContent));
 };
+
+module.exports.info = {
+    description: "<heads/tails> <bet> - flips a coin with your specified bet."
+}

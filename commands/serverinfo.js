@@ -18,3 +18,7 @@ module.exports.run = (client, msg) => {
     .addField("Voice Channels", msg.guild.channels.filter(channel => channel.type === "voice").size, true)
     );
 };
+
+module.exports.info = {
+    description: "detailed information about the server."
+}

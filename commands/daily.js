@@ -27,3 +27,7 @@ module.exports.run = async (client, msg) => {
 
     return msg.channel.send(client.embeds.twobits(client, msg.author, msgContent));
 };
+
+module.exports.info = {
+    description: "collects your daily TwoBits."
+}

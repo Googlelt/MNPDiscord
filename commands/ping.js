@@ -16,5 +16,5 @@ module.exports.run = async (client, msg) => {
 };
 
 module.exports.info = {
-    description: "shows the ping of the bot"
+    description: "shows the ping of the bot."
 };

@@ -11,3 +11,7 @@ module.exports.run = (client, msg) => {
     .setColor(client.config.color)
     .setDescription(commandsString));
 };
+
+module.exports.info = {
+    description: "shows this message."
+}

@@ -9,3 +9,7 @@ module.exports.run = (client, msg, args) => {
     .setImage(user.displayAvatarURL({ size: 1024 }))
     .setTimestamp())
 };
+
+module.exports.info = {
+    description: "view your own/someone else's Avatar."
+}

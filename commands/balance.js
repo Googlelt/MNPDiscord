@@ -9,6 +9,6 @@ module.exports.run = async (client, msg) => {
 };
 
 module.exports.info = {
-    description: "shows your/person their balance",
+    description: "view your own/Someone else's balance.",
     aliases: ["bal", "money", "bank"]
 };

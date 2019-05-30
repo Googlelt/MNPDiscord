@@ -19,3 +19,7 @@ module.exports.run = async (client, msg) => {
         .addField(`${client.config.economy.currencyName} Leaderboard`, leaderboardString)
         .setFooter(`Notice: The #1 position on the leaderboard will receive 1 month of nitro and everyone's ${client.config.economy.currencyName} will reset every month on the 1st`));
 };
+
+module.exports.info = {
+    description: "shows the top 10 people with the most TwoBits."
+}

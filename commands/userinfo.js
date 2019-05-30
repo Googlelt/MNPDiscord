@@ -20,3 +20,7 @@ module.exports.run = (client, msg, args) => {
         .addField("Permissions", permissionsString, true)
     );
 };
+
+module.exports.info = {
+    description: "detailed information about a specific user."
+}
