@@ -15,31 +15,31 @@ async function runLoop(client) {
     if (!json.enabled) return;
     let word = client.config.airdrop.words[Math.floor(Math.random() * client.config.airdrop.words.length)];
     let reward = randomInt(20, 35);
+    let channel = client.channels.get(json.channel);
 
-    await client.channels.get(json.channel).send(new MessageEmbed()
+    await channel.send(new MessageEmbed()
         .setColor(client.config.color)
         .setTimestamp()
         .setDescription(`**${client.config.economy.currencyName} Crate Drop**\nFirst one to type \`${word}\` gains ${reward} ${client.config.economy.currencyName}.`))
 
-    client.channels.get(json.channel).awaitMessages(message => message.content.toLowerCase() === word, {
+    channel.awaitMessages(message => message.content.toLowerCase() === word, {
         max: 1,
         time: 180000,
         errors: ["time"]
     }).catch(err => {
-    return;
+        return channel.send(`No one got the crate, Better luck next time.`);
     }).then(async collected => {
-    let user = collected.first().member.user;
-    let userData = await client.userData.get(client, user.id);
+        let user = collected.first().member.user;
+        let userData = await client.userData.get(client, user.id);
 
-    client.userData.update(client, user.id, {
-        name: "balance",
-        value: userData.balance + reward
-    });
+        client.userData.update(client, user.id, {
+            name: "balance",
+            value: userData.balance + reward
+        });
 
-    return client.channels.get(json.channel).send(new MessageEmbed()
-        .setColor(client.config.color)
-        .setTimestamp()
-        .setDescription(`**${client.config.economy.currencyName} Crate Drop**\n${user.username} got the ${client.config.economy.currencyName} crate drop and won ${reward} ${client.config.economy.currencyName}!`));
-
-    });
+        return channel.send(new MessageEmbed()
+            .setColor(client.config.color)
+            .setTimestamp()
+            .setDescription(`**${client.config.economy.currencyName} Crate Drop**\n${user.username} got the ${client.config.economy.currencyName} crate drop and won ${reward} ${client.config.economy.currencyName}!`));
+        });
 }
