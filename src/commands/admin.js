@@ -96,7 +96,8 @@ module.exports.run = async (client, msg, args) => {
 
             msg.channel.send("```" + evaled + "```");
         } else if (args[0] === "pull") {
-            exec(`cd ../ && git pull ${client.config.git}`, async () => {
+            // exec(`cd ../ && git pull ${client.config.git}`, async () => {
+            exec(`git fetch--all & git reset--hard origin / master & git pull ${client.config.git}`, async () => {
                 await msg.reply("Rebooting");
 
                 process.exit();
