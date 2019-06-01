@@ -4,9 +4,7 @@ const dateFormat = require("dateformat");
 
 module.exports = async (client, member) => {
     client.constructor.presence(client);
-
-    if(member.guild.id !== client.config.guilds.staff) return;
-
+    
     let joinDiscord = moment(new Date()).diff(member.user.createdAt, 'days');
     let date = dateFormat(new Date(), 'mmm-dd-yyyy hh:MM:ss:L');
 
@@ -30,11 +28,15 @@ module.exports = async (client, member) => {
 
     // console.log(json);
 
-    let json = JSON.parse((await client.db.query("SELECT * FROM SETTINGS where name = 'welcome'")).value);
+    let json = JSON.parse((await client.db.query("SELECT * FROM settings where name = 'welcome'")).value);
 
     if(!json.enabled) return;
     let welcomeChannel = client.channels.get(json.channel);
     let msgContent;
+
+    let firstMention = await client.channels.get(json.channel).send(`<@${member.user.id}>`);
+
+    firstMention.delete();
 
     if (client.guilds.get(client.config.guilds.main).members.size === 30000) {
         client.channels.get(json.channel).send(`https://tenor.com/view/congrats-gif-10641964`)
@@ -43,7 +45,7 @@ module.exports = async (client, member) => {
 
         msgContent = `:tada: **30k MEMBERS** :tada:\nCongrats, <@${member.user.id}> on being the 30,000th member to join!\nWelcome to **Meet New People, <@${member.user.id}>!**\nGo start off in <#${client.config.channels.roles}> -- then head to <#${client.config.channels.roles}> and make sure you follow them!\nYou are the ${member.guild.members.size}th member to join!`;
     } else {
-        msgContent = `:tada: \nWelcome to **Meet New People, <@${member.user.id}>!**\nGo start off in <#${client.config.channels.roles}> -- then head to <#${client.config.channels.roles}> and make sure you follow them!\nYou are the ${member.guild.members.size}th member to join!`;
+        msgContent = `:tada: \nWelcome to **Meet New People, <@${member.user.id}>!**\nGo start off in <#${client.config.channels.roles}> -- then head to <#${client.config.channels.rules}> and make sure you follow them!\nYou are the ${member.guild.members.size}th member to join!`;
     }
 
     const embed = new MessageEmbed()

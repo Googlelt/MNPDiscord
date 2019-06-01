@@ -10,7 +10,7 @@ module.exports.run = async (client) => {
 module.exports.force = runLoop;
 
 async function runLoop(client) {
-    let json = JSON.parse((await client.db.query("SELECT * FROM SETTINGS where name = 'drop'")).value);
+    let json = JSON.parse((await client.db.query("SELECT * FROM settings where name = 'drop'")).value);
 
     if (!json.enabled) return;
     let word = client.config.airdrop.words[Math.floor(Math.random() * client.config.airdrop.words.length)];
