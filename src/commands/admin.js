@@ -98,7 +98,7 @@ module.exports.run = async (client, msg, args) => {
         } else if (args[0] === "pull") {
             // exec(`cd ../ && git pull ${client.config.git}`, async () => {
             exec(`cd ../ && git pull ${client.config.git}`, async () => {
-                await msg.reply("Rebooting, be back in a couple sec bois.");
+                await msg.reply("Rebooting.");
 
                 process.exit();
             });
