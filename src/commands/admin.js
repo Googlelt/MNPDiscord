@@ -56,7 +56,7 @@ module.exports.run = async (client, msg, args) => {
 
             return msg.reply("Daily has been reset");
         } else if (args[0] === "welcome") {
-            let json = JSON.parse((await client.db.query("SELECT * FROM SETTINGS where name = 'welcome'")).value);
+            let json = JSON.parse((await client.db.query("SELECT * FROM settings where name = 'welcome'")).value);
 
             if (args[1] === "enabled") {
                 if (!args[2]) return msg.reply("You must specify a boolean (true, false).");
@@ -73,7 +73,7 @@ module.exports.run = async (client, msg, args) => {
 
             return msg.reply("Settings have been updated");
         } else if (args[0] === "drop") {
-            let json = JSON.parse((await client.db.query("SELECT * FROM SETTINGS where name = 'drop'")).value);
+            let json = JSON.parse((await client.db.query("SELECT * FROM settings where name = 'drop'")).value);
 
             if (args[1] === "enabled") {
                 if (!args[2]) return msg.reply("You must specify a boolean (true, false).");
