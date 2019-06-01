@@ -5,22 +5,22 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ."
+    "start": "cd src && node ."
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "dateformat": "^3.0.3",
+    "dateformat": "latest",
     "discord.js": "github:discordjs/discord.js#8915bc1d37f1b83fc9bbd3cfef337bd5f75e4779",
     "ejs": "latest",
     "express": "latest",
     "express-ejs-layouts": "latest",
     "fs-nextra": "latest",
-    "ioredis": "^4.9.5",
-    "lodash": "^4.17.11",
-    "moment": "^2.24.0",
+    "ioredis": "latest",
+    "lodash": "latest",
+    "moment": "latest",
     "mysql2": "latest",
-    "random-int": "^2.0.0"
+    "random-int": "latest"
   }
 }

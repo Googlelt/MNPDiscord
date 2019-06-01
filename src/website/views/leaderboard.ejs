@@ -1,5 +1,20 @@
-<% results.map(row => { %>
+<style><%- include ../public/css/leaderboard.css %></style>
+
+<% results.filter(row => row !== undefined).map(row => { %>
     <% console.log(row) %>
     <div class="userRow">
+        <div class="infoHolder">
+            <div class="avatarHolder">
+                <img src="<%= row.avatar %>">
+            </div>
+
+            <div class="usernameHolder">
+                <label><%= row.username %></label>
+            </div>
+        </div>
+
+        <div class="statsHolder">
+            <label><%= client.config.economy.currencyName %>: <%= row.balance %></label>
+        </div>
     </div>
 <% }); %>

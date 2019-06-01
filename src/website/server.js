@@ -38,7 +38,7 @@ module.exports = (client) => {
         });
     });
 
-    app.get("/stats", (req, res) => {
+    app.get("/stats", async (req, res) => {
         res.render("stats", {
             client: client,
             header: "Stats",
@@ -48,6 +48,10 @@ module.exports = (client) => {
                     online: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.user.presence.status !== "offline").size,
                     offline: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.user.presence.status === "offline").size,
                     voice: client.guilds.get(client.config.guilds.currentGuild).members.filter(member => member.voice.channel).size
+                },
+                db: {
+                    cachedUsers: (await client.redis.keys("*")).length,
+                    databaseUsers: (await client.db.raw.query("SELECT * FROM users"))[0].length
                 },
                 mem: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
                 processUptime: client.utils.convertTime(process.uptime),
@@ -62,11 +66,11 @@ module.exports = (client) => {
         //     return client.utils.getUserInfo(client, row);
         // }));
 
-        let results = await (await client.db.raw.query("SELECT * FROM users ORDER BY balance DESC"));[0]
+        // let results = await (await client.db.raw.query("SELECT * FROM users ORDER BY balance DESC LIMIT 10"));[0]
 
-        let resultsNew = [];
+        // let resultsNew = [];
 
-        results.map(row => {
+        let results = await Promise.all((await client.db.raw.query("SELECT * FROM users ORDER BY balance DESC LIMIT 20"))[0].map(row => {
             let user = client.users.get(row.id);
             if(!user) return;
 
@@ -74,13 +78,13 @@ module.exports = (client) => {
             row.tag = user.tag;
             row.avatar = user.displayAvatarURL({ size: 32 });
 
-            resultsNew.push(row);
-        });
+            return row;
+        }));
 
         res.render("leaderboard", {
             client: client,
             headers: "Leaderboard",
-            results: resultsNew
+            results: results
         });
     });
 

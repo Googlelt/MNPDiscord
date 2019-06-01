@@ -21,5 +21,6 @@ module.exports.run = async (client, msg) => {
 };
 
 module.exports.info = {
-    description: "shows the top 10 people with the most TwoBits."
+    description: "shows the top 10 people with the most <currencyName>.",
+    aliases: ["lb"]
 }

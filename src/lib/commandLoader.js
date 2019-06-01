@@ -22,6 +22,8 @@ module.exports = async (client) => {
         if(!commandInfo.admin) commandInfo.admin = false;
         if(!commandInfo.name) commandInfo.name = file.replace(".js", "");
         if(!commandInfo.description) commandInfo.description = "none";
+        
+        commandInfo.description = commandInfo.description.replace("<currencyName>", client.config.economy.currencyName);
 
         command.info = commandInfo;
 

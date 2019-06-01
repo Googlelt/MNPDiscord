@@ -1,14 +1,51 @@
-.leaderboardRow {
+.userRow {
     background-color: black;
-    width: 50%;
-    margin-top: 1%;
-
-    font-size: 20px !important;
-
-    border-radius: 5px;
+    width: 80%;
+    height: 50px;
+    border-radius: 4px;
+    margin-top: 2%;
+    margin-left: 10%;
 }
 
-.leaderboardRow img {
-    margin: 6px;
+.infoHolder {
+    display: flex;
+    align-content: stretch;
+    /*justify-content: left;*/
+    /*vertical-align: middle;*/
+    width: auto;
+}
+
+.userRow .avatarHolder {
+    margin-left: 4px;
+    float: left;
+    justify-content: left;
+}
+
+.userRow .avatarHolder img {
+    width: 44px;
+    height: 44px;
+    margin-top: 4px;
     border-radius: 50%;
+    border: 3px solid #FFFFFF;
 }
+
+.userRow .usernameHolder label {
+    position: relative;
+    left: 15px;
+    font-size: 15px;
+    top: -30px;
+    margin-left: 4px;
+}
+
+.userRow .statsHolder label {
+    /*left: -23px;*/
+    font-size: 15px;
+    /*top: -10px;*/
+    text-align: left;
+    margin-left: 4px;
+}
+
+/*.userRow .statsHolder {*/
+/*    text-align: left;*/
+/*    font-size: 15px;*/
+/*}*/

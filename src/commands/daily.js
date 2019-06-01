@@ -29,5 +29,5 @@ module.exports.run = async (client, msg) => {
 };
 
 module.exports.info = {
-    description: "collects your daily TwoBits."
+    description: "collects your daily <currencyName>."
 }

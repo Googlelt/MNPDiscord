@@ -22,5 +22,5 @@ module.exports.run = async (client, msg, args) => {
 
 module.exports.info = {
     aliases: ["give", "pay"],
-    description: "@user <amount> - donates the specified amount of TwoBits to the user."
+    description: "@user <amount> - donates the specified amount of <currencyName> to the user."
 }
